@@ -21,7 +21,7 @@ func Initialize(ctx context.Context, l *zap.Logger) (router *gin.Engine) {
 	rWeb.GET("/login", handler.LoginPageHandler)
 	rWeb.GET("/auth/google", handler.GoogleauthHandler)
 	rWeb.GET("/callback", handler.CallbackHandler)
-	rWeb.GET("/home", handler.LoginPageHandler)
+	rWeb.GET("/home", handler.HomePageHandler)
 	for _, route := range router.Routes() {
 		l.Sugar().Infof("Route: %s %s", route.Method, route.Path)
 	}

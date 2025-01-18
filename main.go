@@ -15,6 +15,7 @@ func main() {
 	err := godotenv.Load()
 	if err != nil {
 		log.Println("there is a error in the path of config file", err)
+		return
 	}
 	viper.SetConfigName("config")
 	viper.SetConfigType("json")
@@ -24,14 +25,17 @@ func main() {
 		if _, ok := err.(viper.ConfigFileNotFoundError); ok {
 			// Config file not found; ignore error if desired
 			log.Println("there is a error in the path of config file", err)
+			return
 		} else {
 			// Config file was found but another error was produced
 			log.Println("error laoding config file from viper", err)
+			return
 		}
 	}
 	l, err := logs.InitializeLogger()
 	if err != nil {
 		log.Println("error initializing logger", err)
+		return
 	}
 
 	l.Sugar().Info("this is a test logger")

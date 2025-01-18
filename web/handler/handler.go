@@ -42,10 +42,12 @@ func GoogleauthHandler(c *gin.Context) {
 		return
 	}
 
-	clientID := []byte(os.Getenv("CLIENT-ID"))
+	clientID := []byte(os.Getenv("CLIENT_ID"))
 	params := url.Values{}
 	params.Add("client_id", string(clientID))
-	params.Add("redirect_url", viper.GetString("oauth.redirectURL"))
+	fmt.Println("****** hiii " + string(clientID) + "   hello***********")
+	fmt.Println("********************" + viper.GetString("oauth.redirectURL") + "****************")
+	params.Add("redirect_uri", viper.GetString("oauth.redirectURL"))
 	params.Add("response_type", "code")         // it gives us back the authorization code using which we can trade to get our access token
 	params.Add("scope", "openid email profile") // i might access openid, email,profile
 	params.Add("state", state)
@@ -68,8 +70,8 @@ func CallbackHandler(c *gin.Context) {
 
 	data := url.Values{}
 	data.Set("code", code)
-	data.Set("client_id", os.Getenv("CLIENT-ID"))
-	data.Set("client_secret", os.Getenv("OAUTH-CLIENT-SECRET"))
+	data.Set("client_id", os.Getenv("CLIENT_ID"))
+	data.Set("client_secret", os.Getenv("OAUTH_CLIENT_SECRET"))
 	data.Set("redirect_uri", viper.GetString("oauth.redirectURL"))
 	data.Set("grant_type", "authorization_code")
 
@@ -110,6 +112,11 @@ func CallbackHandler(c *gin.Context) {
 		return
 	}
 	defer resp.Body.Close()
+
+	// user not found
+	//create a new user in the database
+	// create a new session for him
+	// 
 
 	http.Redirect(c.Writer, c.Request, "/web/home", http.StatusTemporaryRedirect)
 }
