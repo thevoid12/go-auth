@@ -1,0 +1,9 @@
+{
+  "logger": {
+    "filepath": "goauth.logs",
+    "level": "debug"
+  },
+  "app": {
+    "port": "8080"
+  }
+}
