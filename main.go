@@ -6,14 +6,20 @@ import (
 	"goauth/web/routes"
 	"log"
 
+	"github.com/joho/godotenv"
 	"github.com/spf13/viper"
 )
 
 func main() {
+
+	err := godotenv.Load()
+	if err != nil {
+		log.Println("there is a error in the path of config file", err)
+	}
 	viper.SetConfigName("config")
 	viper.SetConfigType("json")
 	viper.AddConfigPath("config/") // path to look for the config file in
-	err := viper.ReadInConfig()
+	err = viper.ReadInConfig()
 	if err != nil {
 		if _, ok := err.(viper.ConfigFileNotFoundError); ok {
 			// Config file not found; ignore error if desired

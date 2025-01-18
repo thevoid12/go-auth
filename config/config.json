@@ -4,6 +4,13 @@
     "level": "debug"
   },
   "app": {
-    "port": "8080"
+    "port": "8080",
+    "uiTemplates": "web/templates/"
+  },
+  "oauth":{
+    "googleAuthURL": "https://accounts.google.com/o/oauth2/v2/auth",
+    "googleTokenURL":"https://oauth2.googleapis.com/token",
+    "googleUserInfoURL":"https://openidconnect.googleapis.com/v1/userinfo",
+    "redirectURL"  : "http://localhost:8080/web/callback"
   }
 }
